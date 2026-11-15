@@ -1,0 +1,687 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-15T00:00:00.000Z",
+  "title": "Design System: PAIDI CRM",
+  "extensions": {
+    "colorMeta": {
+      "magenta": {
+        "role": "primary",
+        "displayName": "Chart Magenta",
+        "canonical": "oklch(51.2% 0.198 354)",
+        "tonalRamp": [
+          "#250011",
+          "#4d052c",
+          "#800e4d",
+          "#b71c70",
+          "#e14b94",
+          "#fd83b8",
+          "#ffbfd8",
+          "#ffe7f0"
+        ]
+      },
+      "magenta-dark": {
+        "role": "primary",
+        "displayName": "Deep Magenta",
+        "canonical": "oklch(44.5% 0.171 355)",
+        "tonalRamp": [
+          "#240011",
+          "#4e032c",
+          "#82094c",
+          "#ae306e",
+          "#d85792",
+          "#f48ab6",
+          "#fdc1d7",
+          "#fee8ef"
+        ]
+      },
+      "magenta-tint": {
+        "role": "primary",
+        "displayName": "Magenta Wash",
+        "canonical": "oklch(91.5% 0.032 347)",
+        "tonalRamp": [
+          "#140d10",
+          "#32242b",
+          "#55414b",
+          "#77626c",
+          "#9b8590",
+          "#beabb4",
+          "#dcd1d6",
+          "#f3ecef"
+        ]
+      },
+      "depth-1": {
+        "role": "secondary",
+        "displayName": "Depth 1, Researched",
+        "canonical": "oklch(90.4% 0.026 232)",
+        "tonalRamp": [
+          "#1f4e79",
+          "#2c6089",
+          "#38729b",
+          "#6399c0",
+          "#74a5c6",
+          "#8fbad3",
+          "#afcfe1",
+          "#cfe3ee"
+        ]
+      },
+      "depth-2": {
+        "role": "secondary",
+        "displayName": "Depth 2, Contacted",
+        "canonical": "oklch(83.7% 0.042 233)",
+        "tonalRamp": [
+          "#1f4e79",
+          "#2c6089",
+          "#38729b",
+          "#6399c0",
+          "#74a5c6",
+          "#8fbad3",
+          "#afcfe1",
+          "#cfe3ee"
+        ]
+      },
+      "depth-3": {
+        "role": "secondary",
+        "displayName": "Depth 3, Followed up",
+        "canonical": "oklch(76.7% 0.058 234)",
+        "tonalRamp": [
+          "#1f4e79",
+          "#2c6089",
+          "#38729b",
+          "#6399c0",
+          "#74a5c6",
+          "#8fbad3",
+          "#afcfe1",
+          "#cfe3ee"
+        ]
+      },
+      "depth-4": {
+        "role": "secondary",
+        "displayName": "Depth 4, Responded",
+        "canonical": "oklch(69.9% 0.071 239)",
+        "tonalRamp": [
+          "#1f4e79",
+          "#2c6089",
+          "#38729b",
+          "#6399c0",
+          "#74a5c6",
+          "#8fbad3",
+          "#afcfe1",
+          "#cfe3ee"
+        ]
+      },
+      "depth-5": {
+        "role": "secondary",
+        "displayName": "Depth 5, Call held",
+        "canonical": "oklch(66.1% 0.082 241)",
+        "tonalRamp": [
+          "#1f4e79",
+          "#2c6089",
+          "#38729b",
+          "#6399c0",
+          "#74a5c6",
+          "#8fbad3",
+          "#afcfe1",
+          "#cfe3ee"
+        ]
+      },
+      "depth-6": {
+        "role": "secondary",
+        "displayName": "Depth 6, Proposal sent",
+        "canonical": "oklch(53.1% 0.089 242)",
+        "tonalRamp": [
+          "#1f4e79",
+          "#2c6089",
+          "#38729b",
+          "#6399c0",
+          "#74a5c6",
+          "#8fbad3",
+          "#afcfe1",
+          "#cfe3ee"
+        ]
+      },
+      "depth-7": {
+        "role": "secondary",
+        "displayName": "Depth 7, Pilot",
+        "canonical": "oklch(47.3% 0.087 245)",
+        "tonalRamp": [
+          "#1f4e79",
+          "#2c6089",
+          "#38729b",
+          "#6399c0",
+          "#74a5c6",
+          "#8fbad3",
+          "#afcfe1",
+          "#cfe3ee"
+        ]
+      },
+      "depth-8": {
+        "role": "secondary",
+        "displayName": "Depth 8, Client",
+        "canonical": "oklch(41.4% 0.088 249)",
+        "tonalRamp": [
+          "#1f4e79",
+          "#2c6089",
+          "#38729b",
+          "#6399c0",
+          "#74a5c6",
+          "#8fbad3",
+          "#afcfe1",
+          "#cfe3ee"
+        ]
+      },
+      "on-depth": {
+        "role": "secondary",
+        "displayName": "Cream On Deep Water",
+        "canonical": "oklch(98.5% 0.020 92)",
+        "tonalRamp": [
+          "#110f0b",
+          "#2c2920",
+          "#4c483b",
+          "#6d695c",
+          "#918c7e",
+          "#b5b1a6",
+          "#d6d4ce",
+          "#f0eeeb"
+        ]
+      },
+      "green": {
+        "role": "tertiary",
+        "displayName": "Intertidal Green",
+        "canonical": "oklch(55.4% 0.069 158)",
+        "tonalRamp": [
+          "#05130b",
+          "#0e311f",
+          "#235339",
+          "#457559",
+          "#68997c",
+          "#95bca4",
+          "#c5dbcd",
+          "#e6f2ea"
+        ]
+      },
+      "green-tint": {
+        "role": "tertiary",
+        "displayName": "Green Tint",
+        "canonical": "oklch(92.2% 0.027 140)",
+        "tonalRamp": [
+          "#0d110c",
+          "#232c22",
+          "#404b3e",
+          "#616d5e",
+          "#849081",
+          "#aab5a8",
+          "#d0d6cf",
+          "#ecf0eb"
+        ]
+      },
+      "amber": {
+        "role": "tertiary",
+        "displayName": "Chart Ochre",
+        "canonical": "oklch(50.8% 0.105 72)",
+        "tonalRamp": [
+          "#1a0c00",
+          "#3a2302",
+          "#623f07",
+          "#8e5d11",
+          "#b3813d",
+          "#d3a975",
+          "#e7d0b4",
+          "#faecdc"
+        ]
+      },
+      "amber-tint": {
+        "role": "tertiary",
+        "displayName": "Ochre Tint",
+        "canonical": "oklch(91.5% 0.063 90)",
+        "tonalRamp": [
+          "#140f04",
+          "#322809",
+          "#55461c",
+          "#77683d",
+          "#9b8b60",
+          "#bdb08d",
+          "#dbd4c1",
+          "#f2eee3"
+        ]
+      },
+      "buff": {
+        "role": "neutral",
+        "displayName": "Chart Buff",
+        "canonical": "oklch(94.0% 0.037 92)",
+        "tonalRamp": [
+          "#120f08",
+          "#2e2919",
+          "#4f4731",
+          "#716951",
+          "#948c73",
+          "#b8b19c",
+          "#d8d4c9",
+          "#f1eee8"
+        ]
+      },
+      "card": {
+        "role": "neutral",
+        "displayName": "Card Buff",
+        "canonical": "oklch(97.9% 0.016 92)",
+        "tonalRamp": [
+          "#100f0c",
+          "#2b2922",
+          "#4b483e",
+          "#6c695e",
+          "#908c81",
+          "#b4b1a8",
+          "#d6d4cf",
+          "#efeeeb"
+        ]
+      },
+      "field": {
+        "role": "neutral",
+        "displayName": "Field Paper",
+        "canonical": "oklch(99.4% 0.009 94)",
+        "tonalRamp": [
+          "#100f0e",
+          "#2a2925",
+          "#494842",
+          "#6b6963",
+          "#8e8c86",
+          "#b2b1ac",
+          "#d5d4d1",
+          "#efeeed"
+        ]
+      },
+      "lane": {
+        "role": "neutral",
+        "displayName": "Lane Buff",
+        "canonical": "oklch(91.6% 0.040 91)",
+        "tonalRamp": [
+          "#120f08",
+          "#2e2817",
+          "#50472f",
+          "#71684f",
+          "#958c71",
+          "#b8b19b",
+          "#d8d4c8",
+          "#f1eee7"
+        ]
+      },
+      "sand": {
+        "role": "neutral",
+        "displayName": "Sand",
+        "canonical": "oklch(89.5% 0.045 92)",
+        "tonalRamp": [
+          "#120f07",
+          "#2f2814",
+          "#50472b",
+          "#72684b",
+          "#968c6d",
+          "#b9b198",
+          "#d9d4c6",
+          "#f1eee6"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Warm Hairline",
+        "canonical": "oklch(86.7% 0.044 91)",
+        "tonalRamp": [
+          "#120f07",
+          "#2f2815",
+          "#50472b",
+          "#72684c",
+          "#968c6e",
+          "#b9b198",
+          "#d9d4c6",
+          "#f1eee6"
+        ]
+      },
+      "line-strong": {
+        "role": "neutral",
+        "displayName": "Strong Hairline",
+        "canonical": "oklch(80.5% 0.050 92)",
+        "tonalRamp": [
+          "#130f06",
+          "#302811",
+          "#514727",
+          "#736847",
+          "#978c69",
+          "#bab195",
+          "#d9d4c4",
+          "#f1eee5"
+        ]
+      },
+      "navy": {
+        "role": "neutral",
+        "displayName": "Deep-Water Navy",
+        "canonical": "oklch(26.9% 0.045 247)",
+        "tonalRamp": [
+          "#091017",
+          "#1a2b39",
+          "#334a5f",
+          "#546c82",
+          "#768fa7",
+          "#9fb4c7",
+          "#cad6e1",
+          "#e9eff6"
+        ]
+      },
+      "navy-soft": {
+        "role": "neutral",
+        "displayName": "Soft Navy",
+        "canonical": "oklch(36.2% 0.057 248)",
+        "tonalRamp": [
+          "#071019",
+          "#162b3d",
+          "#2e4a65",
+          "#4f6c88",
+          "#7190ad",
+          "#9bb4cd",
+          "#c8d6e4",
+          "#e7f0f8"
+        ]
+      },
+      "mute": {
+        "role": "neutral",
+        "displayName": "Slate Mute",
+        "canonical": "oklch(47.6% 0.032 242)",
+        "tonalRamp": [
+          "#0b1014",
+          "#1e2a34",
+          "#394a57",
+          "#596c7a",
+          "#7c8f9e",
+          "#a4b3c0",
+          "#cdd6dd",
+          "#eaeff3"
+        ]
+      },
+      "rail-text": {
+        "role": "neutral",
+        "displayName": "Rail Text",
+        "canonical": "oklch(86.9% 0.019 238)",
+        "tonalRamp": [
+          "#0c1012",
+          "#222a2f",
+          "#3f4951",
+          "#5f6b73",
+          "#828e96",
+          "#a9b3ba",
+          "#cfd5d9",
+          "#eceff1"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Sounding",
+        "purpose": "Stage counts on the depth strip (44px desktop, 32px phones) and the one statement on the sign-in panel."
+      },
+      "headline": {
+        "displayName": "Page title",
+        "purpose": "One per screen, in the header row."
+      },
+      "title": {
+        "displayName": "Section title",
+        "purpose": "Card and section headings, empty-state titles; 18px in sheet headers."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All running text and controls at 14px; tables at 13.5px. Tabular figures on by default."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Field labels, small buttons, tabs and chips, 12 to 13.5px semibold."
+      },
+      "meta": {
+        "displayName": "Meta",
+        "purpose": "Hints, timestamps, counts and table headers in slate mute."
+      },
+      "stage-name": {
+        "displayName": "Stage name",
+        "purpose": "Italic (font-style, not expressible in the token) stage names under the soundings. The only italic in the system."
+      }
+    },
+    "shadows": [
+      {
+        "name": "soft",
+        "value": "0 1px 2px rgb(18 40 59 / 0.05), 0 6px 16px -8px rgb(18 40 59 / 0.16)",
+        "purpose": "Resting cards, the selected tab, conversion pills, board card hover."
+      },
+      {
+        "name": "lift",
+        "value": "0 2px 4px rgb(18 40 59 / 0.08), 0 18px 32px -12px rgb(18 40 59 / 0.32)",
+        "purpose": "The dragged card, sheets and toasts."
+      },
+      {
+        "name": "field-focus",
+        "value": "0 0 0 3px rgb(63 124 166 / 0.22)",
+        "purpose": "Ring on a focused input, paired with a depth-7 border."
+      },
+      {
+        "name": "selected-segment",
+        "value": "inset 0 0 0 3px var(--color-navy)",
+        "purpose": "The depth strip segment currently filtering the board."
+      },
+      {
+        "name": "drop-target",
+        "value": "inset 0 0 0 2px var(--color-depth-7)",
+        "purpose": "The lane under a dragged card."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The single easing for every transition and keyframe."
+      },
+      {
+        "name": "state",
+        "value": "150ms",
+        "purpose": "Hover, focus, press and selection changes on controls."
+      },
+      {
+        "name": "row-hover",
+        "value": "120ms",
+        "purpose": "Table row background."
+      },
+      {
+        "name": "drop",
+        "value": "180ms",
+        "purpose": "A dragged card settling into its lane."
+      },
+      {
+        "name": "sheet-in",
+        "value": "260ms",
+        "purpose": "Sheet entrance: 24px from the right on desktop, 16px up on phones, from 40% opacity."
+      },
+      {
+        "name": "figure-settle",
+        "value": "420ms",
+        "purpose": "A sounding figure rising 6px and fading up when its count changes; never on first load."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "0.01ms",
+        "purpose": "All animation and transition durations collapse under prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "board-align",
+        "value": "1400px"
+      },
+      {
+        "name": "content-max",
+        "value": "1480px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one magenta action in a screen header: Add prospect, Log a touch, Send sign-in link.",
+      "html": "<button class=\"ds-btn-primary\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"M12 5v14\"/></svg> Add prospect</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 36px; padding: 0 14px; border-radius: 10px; font-family: var(--font-sans, \"Figtree Variable\", ui-sans-serif, system-ui, sans-serif); font-weight: 600; font-size: 14px; white-space: nowrap; cursor: pointer; transition: background-color 150ms cubic-bezier(0.16, 1, 0.3, 1), border-color 150ms cubic-bezier(0.16, 1, 0.3, 1), transform 150ms cubic-bezier(0.16, 1, 0.3, 1); border: 1px solid var(--color-magenta); background: var(--color-magenta); color: #fff; } .ds-btn-primary:hover { background: var(--color-magenta-dark); border-color: var(--color-magenta-dark); } .ds-btn-primary:active { transform: translateY(1px); } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-depth-7); outline-offset: 2px; }"
+    },
+    {
+      "name": "Default Button",
+      "kind": "button",
+      "refersTo": "button",
+      "description": "Paper button with a warm hairline for secondary actions such as Add task, Cancel and Undo.",
+      "html": "<button class=\"ds-btn\">Add task</button>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 36px; padding: 0 14px; border-radius: 10px; font-family: var(--font-sans, \"Figtree Variable\", ui-sans-serif, system-ui, sans-serif); font-weight: 600; font-size: 14px; white-space: nowrap; cursor: pointer; transition: background-color 150ms cubic-bezier(0.16, 1, 0.3, 1), border-color 150ms cubic-bezier(0.16, 1, 0.3, 1), transform 150ms cubic-bezier(0.16, 1, 0.3, 1); border: 1px solid var(--color-line); background: var(--color-card); color: var(--color-navy); } .ds-btn:hover { background: #fffdf5; border-color: #cbbf9b; } .ds-btn:active { transform: translateY(1px); } .ds-btn:focus-visible { outline: 2px solid var(--color-depth-7); outline-offset: 2px; }"
+    },
+    {
+      "name": "Navy Button",
+      "kind": "button",
+      "refersTo": "button-navy",
+      "description": "The confirming action inside a sheet or an inline confirmation.",
+      "html": "<button class=\"ds-btn-navy\">Mark as Lost</button>",
+      "css": ".ds-btn-navy { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 36px; padding: 0 14px; border-radius: 10px; font-family: var(--font-sans, \"Figtree Variable\", ui-sans-serif, system-ui, sans-serif); font-weight: 600; font-size: 14px; white-space: nowrap; cursor: pointer; transition: background-color 150ms cubic-bezier(0.16, 1, 0.3, 1), border-color 150ms cubic-bezier(0.16, 1, 0.3, 1), transform 150ms cubic-bezier(0.16, 1, 0.3, 1); border: 1px solid var(--color-navy); background: var(--color-navy); color: var(--color-buff); } .ds-btn-navy:hover { background: var(--color-navy-soft); border-color: var(--color-navy-soft); } .ds-btn-navy:active { transform: translateY(1px); } .ds-btn-navy:focus-visible { outline: 2px solid var(--color-depth-7); outline-offset: 2px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Borderless small action for Close, Clear filters and card-level Edit.",
+      "html": "<button class=\"ds-btn-ghost\">Clear filters</button>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 36px; padding: 0 14px; border-radius: 10px; font-family: var(--font-sans, \"Figtree Variable\", ui-sans-serif, system-ui, sans-serif); font-weight: 600; font-size: 14px; white-space: nowrap; cursor: pointer; transition: background-color 150ms cubic-bezier(0.16, 1, 0.3, 1), border-color 150ms cubic-bezier(0.16, 1, 0.3, 1), transform 150ms cubic-bezier(0.16, 1, 0.3, 1); height: 30px; padding: 0 10px; font-size: 13px; border: 1px solid transparent; background: transparent; color: var(--color-navy); } .ds-btn-ghost:hover { background: var(--color-sand); } .ds-btn-ghost:active { transform: translateY(1px); } .ds-btn-ghost:focus-visible { outline: 2px solid var(--color-depth-7); outline-offset: 2px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Labelled field on field paper with a hint below; focus turns the border depth-7 with a soft blue ring.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Research hook</span><input class=\"ds-input\" placeholder=\"What caught your eye about them\" /><span class=\"ds-field-hint\">One line you would open the email with.</span></label>",
+      "css": ".ds-field { display: block; max-width: 320px; font-family: var(--font-sans, \"Figtree Variable\", ui-sans-serif, system-ui, sans-serif); } .ds-field-label { display: block; margin-bottom: 5px; font-size: 13px; font-weight: 600; color: var(--color-navy); } .ds-input { width: 100%; height: 38px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--color-line); background: #fffdf6; color: var(--color-ink); font: inherit; font-size: 14px; caret-color: var(--color-magenta); transition: border-color 150ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-input::placeholder { color: #66757f; opacity: 1; } .ds-input:hover { border-color: #cbbf9b; } .ds-input:focus { outline: none; border-color: var(--color-depth-7); box-shadow: 0 0 0 3px rgb(63 124 166 / 0.22); } .ds-field-hint { display: block; margin-top: 4px; font-size: 12.5px; color: var(--color-mute); }"
+    },
+    {
+      "name": "Chips",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Round status chips: plain, alert, good, warn, and a stage chip on its own depth step.",
+      "html": "<span class=\"ds-chips\"><span class=\"ds-chip ds-chip-plain\">Automatic</span><span class=\"ds-chip ds-chip-alert\">Follow-up due</span><span class=\"ds-chip ds-chip-good\">Replied</span><span class=\"ds-chip ds-chip-warn\">Demo data</span><span class=\"ds-chip ds-chip-stage\">Call held</span></span>",
+      "css": ".ds-chips { display: inline-flex; flex-wrap: wrap; gap: 8px; } .ds-chip { display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 9px; border-radius: 999px; font-family: var(--font-sans, \"Figtree Variable\", ui-sans-serif, system-ui, sans-serif); font-size: 12px; font-weight: 600; white-space: nowrap; } .ds-chip-plain { background: var(--color-sand); color: var(--color-navy); } .ds-chip-alert { background: var(--color-magenta-tint); color: var(--color-magenta-dark); } .ds-chip-good { background: var(--color-green-tint); color: #2f5a41; } .ds-chip-warn { background: var(--color-amber-tint); color: #5c3c05; } .ds-chip-stage { background: var(--color-depth-5); color: var(--color-navy); }"
+    },
+    {
+      "name": "Tabs",
+      "kind": "nav",
+      "refersTo": "tabs",
+      "description": "Segmented view switch on a lane-buff track; the selected segment is navy.",
+      "html": "<div class=\"ds-tabs\" role=\"tablist\"><button class=\"ds-tab ds-tab-on\" role=\"tab\" aria-selected=\"true\">Board</button><button class=\"ds-tab\" role=\"tab\" aria-selected=\"false\">Table</button></div>",
+      "css": ".ds-tabs { display: inline-flex; border-radius: 12px; background: var(--color-lane); padding: 4px; } .ds-tab { height: 32px; border: 0; border-radius: 9px; padding: 0 14px; background: transparent; color: var(--color-navy); font-family: var(--font-sans, \"Figtree Variable\", ui-sans-serif, system-ui, sans-serif); font-size: 13.5px; font-weight: 600; cursor: pointer; transition: background-color 150ms, color 150ms; } .ds-tab:hover { background: var(--color-sand); } .ds-tab-on, .ds-tab-on:hover { background: var(--color-navy); color: var(--color-buff); box-shadow: 0 1px 2px rgb(18 40 59 / 0.05), 0 6px 16px -8px rgb(18 40 59 / 0.16); } .ds-tab:focus-visible { outline: 2px solid var(--color-depth-7); outline-offset: 2px; }"
+    },
+    {
+      "name": "Side Rail",
+      "kind": "nav",
+      "refersTo": "rail",
+      "description": "Navy rail navigation: the active item inverts to buff, a magenta badge counts items awaiting review.",
+      "html": "<nav class=\"ds-rail\"><p class=\"ds-rail-brand\">PAIDI CRM</p><a class=\"ds-rail-item\" href=\"#\"><svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8\"/><path d=\"M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"/></svg> Home</a><a class=\"ds-rail-item ds-rail-on\" href=\"#\"><svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\"/><path d=\"M8 7v7\"/><path d=\"M12 7v4\"/><path d=\"M16 7v9\"/></svg> Pipeline</a><a class=\"ds-rail-item\" href=\"#\"><svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z\"/></svg> Review queue <span class=\"ds-rail-badge\">3</span></a></nav>",
+      "css": ".ds-rail { display: flex; flex-direction: column; gap: 2px; width: 232px; padding: 24px 12px 16px; border-radius: 14px; background: var(--color-navy); color: var(--color-rail-text); font-family: var(--font-sans, \"Figtree Variable\", ui-sans-serif, system-ui, sans-serif); } .ds-rail-brand { margin: 0; padding: 0 12px 24px; font-size: 20px; font-weight: 700; letter-spacing: 0.04em; color: var(--color-buff); } .ds-rail-item { display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 12px; border-radius: 10px; color: inherit; font-size: 14px; font-weight: 500; text-decoration: none; transition: background-color 150ms, color 150ms; } .ds-rail-item:hover { background: var(--color-navy-soft); color: var(--color-buff); } .ds-rail-on, .ds-rail-on:hover { background: var(--color-buff); color: var(--color-navy); font-weight: 700; } .ds-rail-item:focus-visible { outline: 2px solid var(--color-depth-3); outline-offset: 2px; } .ds-rail-badge { margin-left: auto; display: grid; place-items: center; height: 20px; min-width: 20px; padding: 0 6px; border-radius: 999px; background: var(--color-magenta); color: #fff; font-size: 11px; font-weight: 700; }"
+    },
+    {
+      "name": "Depth Strip",
+      "kind": "custom",
+      "refersTo": "depth-segment",
+      "description": "The signature: eight stages deepening in blue, a sounding figure per stage, conversion pills on the boundaries, the weakest step in magenta.",
+      "html": "<div class=\"ds-strip\"><button type=\"button\" class=\"ds-strip-seg ds-strip-d1\"><span class=\"ds-strip-fig\">4</span><span class=\"ds-strip-name\">Researched</span><span class=\"ds-strip-pill\">83%</span></button><button type=\"button\" class=\"ds-strip-seg ds-strip-d2\"><span class=\"ds-strip-fig\">6</span><span class=\"ds-strip-name\">Contacted</span><span class=\"ds-strip-pill\">70%</span></button><button type=\"button\" class=\"ds-strip-seg ds-strip-d3\"><span class=\"ds-strip-fig\">3</span><span class=\"ds-strip-name\">Followed up</span><span class=\"ds-strip-pill\">64%</span></button><button type=\"button\" class=\"ds-strip-seg ds-strip-d4\"><span class=\"ds-strip-fig\">2</span><span class=\"ds-strip-name\">Responded</span><span class=\"ds-strip-pill\">67%</span></button><button type=\"button\" class=\"ds-strip-seg ds-strip-d5\"><span class=\"ds-strip-fig\">2</span><span class=\"ds-strip-name\">Call held</span><span class=\"ds-strip-pill ds-strip-weak\">50%<span class=\"ds-strip-tag\">Weakest step</span></span></button><button type=\"button\" class=\"ds-strip-seg ds-strip-d6\"><span class=\"ds-strip-fig\">1</span><span class=\"ds-strip-name\">Proposal sent</span><span class=\"ds-strip-pill\">67%</span></button><button type=\"button\" class=\"ds-strip-seg ds-strip-d7\"><span class=\"ds-strip-fig\">1</span><span class=\"ds-strip-name\">Pilot</span><span class=\"ds-strip-pill\">50%</span></button><button type=\"button\" class=\"ds-strip-seg ds-strip-d8\"><span class=\"ds-strip-fig\">1</span><span class=\"ds-strip-name\">Client</span></button></div>",
+      "css": ".ds-strip { display: flex; margin-top: 22px; font-family: var(--font-sans, \"Figtree Variable\", ui-sans-serif, system-ui, sans-serif); font-variant-numeric: tabular-nums; } .ds-strip-seg { position: relative; flex: 1; height: 108px; border: 0; padding: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; cursor: pointer; font: inherit; transition: filter 150ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-strip-seg:hover { filter: brightness(1.04); } .ds-strip-seg:focus-visible { outline: 2px solid var(--color-depth-7); outline-offset: 2px; } .ds-strip-seg:first-child { border-radius: 16px 0 0 16px; } .ds-strip-seg:last-child { border-radius: 0 16px 16px 0; } .ds-strip-d1 { background: var(--color-depth-1); color: var(--color-navy); } .ds-strip-d2 { background: var(--color-depth-2); color: var(--color-navy); } .ds-strip-d3 { background: var(--color-depth-3); color: var(--color-navy); } .ds-strip-d4 { background: var(--color-depth-4); color: var(--color-navy); } .ds-strip-d5 { background: var(--color-depth-5); color: var(--color-navy); } .ds-strip-d6 { background: var(--color-depth-6); color: #fffaeb; } .ds-strip-d7 { background: var(--color-depth-7); color: #fffaeb; } .ds-strip-d8 { background: var(--color-depth-8); color: #fffaeb; } .ds-strip-fig { font-size: 44px; font-weight: 700; line-height: 1; letter-spacing: -0.02em; } .ds-strip-name { margin-top: 6px; font-size: 13.5px; font-weight: 500; font-style: italic; } .ds-strip-pill { position: absolute; right: 0; top: 50%; z-index: 2; transform: translate(50%, -50%); border-radius: 999px; padding: 6px 10px; font-size: 16px; font-weight: 700; line-height: 1; background: var(--color-card); color: var(--color-navy); box-shadow: 0 1px 2px rgb(18 40 59 / 0.05), 0 6px 16px -8px rgb(18 40 59 / 0.16); } .ds-strip-weak { background: var(--color-magenta); color: #fff; } .ds-strip-tag { position: absolute; bottom: 100%; left: 50%; margin-bottom: 6px; transform: translateX(-50%); white-space: nowrap; border-radius: 999px; background: var(--color-magenta); padding: 3px 8px; font-size: 10.5px; font-weight: 700; }"
+    },
+    {
+      "name": "Prospect Card",
+      "kind": "card",
+      "refersTo": "board-card",
+      "description": "Board card in a lane: overdue chip, company, contact and owner, industry and size, then fit dot, touch slots and last touch.",
+      "html": "<section class=\"ds-lane\"><div class=\"ds-lane-band\"></div><header class=\"ds-lane-head\"><h3>Contacted</h3><span>6</span></header><article class=\"ds-pcard\"><span class=\"ds-pcard-due\">Follow-up due</span><h4>Keystone Legal Group</h4><div class=\"ds-pcard-row\"><p>Priya Raman</p><span class=\"ds-pcard-av\">A</span></div><p class=\"ds-pcard-meta\">Legal · 55</p><div class=\"ds-pcard-foot\"><span class=\"ds-fit\"><i></i></span><span class=\"ds-slots\"><i class=\"ds-on\"></i><i class=\"ds-on\"></i><i></i></span><span class=\"ds-pcard-last\">5d</span></div></article></section>",
+      "css": ".ds-lane { width: 220px; overflow: hidden; border-radius: 14px; background: var(--color-lane); color: var(--color-navy); font-family: var(--font-sans, \"Figtree Variable\", ui-sans-serif, system-ui, sans-serif); font-variant-numeric: tabular-nums; } .ds-lane-band { height: 7px; background: var(--color-depth-2); } .ds-lane-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px 6px; } .ds-lane-head h3 { margin: 0; font-size: 13px; font-weight: 700; } .ds-lane-head span { font-size: 12.5px; font-weight: 600; color: var(--color-mute); } .ds-pcard { margin: 0 6px 8px; border: 1px solid var(--color-line); border-radius: 11px; background: var(--color-card); padding: 8px 10px; cursor: grab; transition: box-shadow 150ms; } .ds-pcard:hover { box-shadow: 0 1px 2px rgb(18 40 59 / 0.05), 0 6px 16px -8px rgb(18 40 59 / 0.16); } .ds-pcard:active { cursor: grabbing; box-shadow: 0 2px 4px rgb(18 40 59 / 0.08), 0 18px 32px -12px rgb(18 40 59 / 0.32); } .ds-pcard-due { display: inline-flex; align-items: center; height: 19px; margin-bottom: 6px; padding: 0 8px; border-radius: 999px; background: var(--color-magenta-tint); color: var(--color-magenta-dark); font-size: 11px; font-weight: 600; } .ds-pcard h4 { margin: 0; font-size: 13.5px; font-weight: 700; line-height: 1.25; } .ds-pcard-row { display: flex; align-items: center; gap: 6px; margin-top: 2px; } .ds-pcard-row p { flex: 1; margin: 0; font-size: 12.5px; } .ds-pcard-av { display: inline-grid; place-items: center; width: 19px; height: 19px; border-radius: 999px; background: var(--color-depth-2); font-size: 9px; font-weight: 700; } .ds-pcard-meta { margin: 2px 0 0; font-size: 12px; color: var(--color-mute); } .ds-pcard-foot { display: flex; align-items: center; gap: 6px; margin-top: 8px; padding-top: 8px; border-top: 1px solid #ebe1c6; font-size: 11.5px; color: var(--color-mute); } .ds-fit { display: grid; place-items: center; width: 14px; height: 14px; } .ds-fit i { display: block; width: 12px; height: 12px; border-radius: 999px; background: var(--color-depth-8); } .ds-slots { display: inline-flex; gap: 3px; } .ds-slots i { display: block; box-sizing: border-box; width: 9px; height: 9px; border-radius: 3px; border: 1px solid #9aa7b0; } .ds-slots .ds-on { border-color: var(--color-navy); background: var(--color-navy); } .ds-pcard-last { margin-left: auto; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The River Chart",
+    "overview": "The pipeline is drawn the way a navigation chart draws a river. The ground is chart buff, the frame is deep-water navy, and the eight pipeline stages run from pale shallows to deep channel in a single blue ramp. A stage count is a sounding, set large; the share that went on to the next stage sits on the boundary between two depths; the place where the most prospects are lost is marked in chart magenta, the one colour that does not belong to the water.\n\nThe chart was softened on the user's steer (\"softer and more warm, keep the blues and beige, homier\"), and the build carries that everywhere: corners of 10 to 20px, warm hairlines a few steps darker than the paper instead of navy outlines, low navy-tinted shadows, and one rounded humanist sans. It is an operating tool for three people, so density is high (14px body, 36px controls, 40px table rows) but nothing is grey, white or cold. There is no pure white surface and no neutral grey anywhere in the build.\n\nThe system refuses the grey screen with white cards and one blue accent. Blue here is not an accent; it is the data.",
+    "keyCharacteristics": [
+      "Warm paper in four close steps (buff, card, lane, sand) with a single navy for ink, rail and the selected state.",
+      "An eight-step depth-blue ramp that always means pipeline stage, in order.",
+      "Magenta reserved for the primary action and for trouble: the weakest step, overdue follow-ups, errors, items waiting on review.",
+      "One family, Figtree, with tabular figures on by default; hierarchy comes from weight and size.",
+      "Domain facts drawn as fixed marks: fit is dot size, the 3-touch cadence is three slots.",
+      "Motion is nearly absent: 150ms state changes, one settle on the soundings, a lifted card while dragging."
+    ],
+    "rules": [
+      {
+        "name": "The Stage Owns Its Step Rule",
+        "body": "A stage always wears its own depth step, everywhere it appears: strip, lane band, chip, table select, funnel bar. The ramp is never reordered, never shortened, and never spent as a set of categorical colours for anything that is not a stage.",
+        "section": "colors"
+      },
+      {
+        "name": "The Magenta Means Act Rule",
+        "body": "Magenta marks the one thing to do or the thing that is wrong. It is never a decoration, a brand wash, or a hover tint on something neutral.",
+        "section": "colors"
+      },
+      {
+        "name": "The Warm Ground Rule",
+        "body": "No pure white and no neutral grey. The lightest surface is field paper; every neutral leans toward buff or toward navy.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Family Rule",
+        "body": "Figtree only. Hierarchy comes from weight (400, 500, 600, 700) and size; there is no second face, no monospace, and no uppercase label style. Text is sentence case throughout.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sounding Rule",
+        "body": "The largest type on a working screen is a number that answers \"how many are here\". Prose never gets display size inside the signed-in app.",
+        "section": "typography"
+      },
+      {
+        "name": "The Italic Is The River Rule",
+        "body": "Italic is reserved for stage names on the depth strip, the way a chart letters water features.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Board Rule",
+        "body": "Board cards are flat with a hairline at rest. Soft shadow arrives on hover; lift arrives only while a card is in the hand.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Inset Ring Rule",
+        "body": "Selection and drop state are drawn as inset rings, so nothing changes size and neighbours do not shift.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do give each stage its own depth step wherever it appears, in funnel order, with navy text on steps 1 to 5 and warm cream on steps 6 to 8.",
+      "Do keep every surface in the buff family: buff ground, card buff objects, lane buff recesses, field paper inputs.",
+      "Do use magenta for the primary action and for trouble (weakest step, overdue, error, awaiting review), and nothing else.",
+      "Do draw borders as 1px warm hairlines and show selection or drop state with an inset ring.",
+      "Do set counts as the largest type on a working screen, in bold Figtree with tabular figures.",
+      "Do keep radii in the family already shipped: 10px controls, 14px cards and lanes, 16px strip, 20px sheet corners, fully round chips.",
+      "Do put the controls that change a figure directly above that figure, and fold them behind one control on phones.",
+      "Do use a side sheet on desktop and a bottom sheet on phones for every create, edit and confirm flow.",
+      "Do offer Undo in the toast for any change that can be reversed.",
+      "Do draw fit as dot size and cadence as three slots; add the number beside the mark only where there is room.",
+      "Do honour reduced motion; all transitions and the two keyframes collapse when it is set."
+    ],
+    "donts": [
+      "Don't build the grey screen with white cards and one blue accent. Blue is the stage data here, not an accent.",
+      "Don't use pure white or neutral grey for any surface, border or text.",
+      "Don't put hard navy outlines around containers; the user asked for softer and warmer. Navy lines are reserved for the selected strip segment and filled touch slots.",
+      "Don't reorder the depth ramp, skip steps, or reuse it as a categorical palette for non-stage data.",
+      "Don't use magenta decoratively or for a neutral hover.",
+      "Don't add a second typeface, a monospace, or uppercase tracked labels.",
+      "Don't use italic outside the stage names on the depth strip.",
+      "Don't use black or neutral shadows; shadows are navy-tinted, low, and only the two shipped strengths.",
+      "Don't nest cards inside cards; divide rows inside a card with a hairline.",
+      "Don't animate beyond 150ms state transitions, the sheet entrance, the figure settle, and the lifted drag card."
+    ]
+  }
+}
