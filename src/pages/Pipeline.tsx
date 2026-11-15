@@ -131,7 +131,7 @@ export function Pipeline() {
     <>
       <div className="mb-2 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-[13px] text-mute">
         <h2 className="text-[13.5px] font-bold text-navy">Depth profile</h2>
-        <span>Figure: prospects in each stage{filtering ? " under these filters" : ""}. Pill: share that went on to the next stage, all time.</span>
+        <span>Figure: prospects in each stage{filtering ? " under these filters" : ""}. Pill: share that went on to the next stage, all time. Magenta marks the weakest step.</span>
         <span className="ml-auto flex gap-4">
           {SIDE_STAGES.map((s) => (
             <button key={s} className={cx("font-medium hover:text-navy", stageFilter === s && "text-navy underline")}

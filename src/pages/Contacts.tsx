@@ -151,7 +151,7 @@ export function Contacts() {
               <table className="table min-w-[1120px]">
                 <colgroup>
                   <col className="w-[14%]" /><col className="w-[14%]" /><col className="w-[15%]" /><col className="w-[9%]" />
-                  <col className="w-[19%]" /><col className="w-[7%]" /><col className="w-[12%]" /><col className="w-[4%]" /><col className="w-[6%]" />
+                  <col className="w-[18%]" /><col className="w-[5%]" /><col className="w-[15%]" /><col className="w-[4%]" /><col className="w-[6%]" />
                 </colgroup>
                 <thead>
                   <tr>

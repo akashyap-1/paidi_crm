@@ -36,3 +36,4 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 - Filters and search sit in their own row above the depth strip, not in the top bar: five selects plus search do not fit beside the title at laptop width, and they belong above the strip whose figures they change. On phones the selects fold behind one Filters control.
 - The eight lanes align under the strip segments from 1400px wide; narrower screens scroll the board sideways with 168px lanes so cards stay legible.
 - Add prospect opens with five fields (company, website, hook, contact name, contact email); everything else is behind More details.
+- Owner avatars are one colour for everyone and identify people by initial. Per-person colour is used only in the Activity chart, where each series is also labelled.

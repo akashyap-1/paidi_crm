@@ -93,8 +93,8 @@ export function ProspectSheet({ open, onClose, onCreated }: {
         </div>
 
         <details className="group rounded-[14px] border border-line bg-card/60">
-          <summary className="flex h-11 cursor-pointer list-none items-center justify-between rounded-[14px] px-4 text-[14px] font-bold hover:bg-sand [&::-webkit-details-marker]:hidden">
-            More details
+          <summary className="flex min-h-11 cursor-pointer list-none flex-col justify-center gap-x-3 rounded-[14px] px-4 py-2 text-[14px] font-bold hover:bg-sand sm:flex-row sm:items-center sm:justify-between [&::-webkit-details-marker]:hidden">
+            <span className="whitespace-nowrap">More details</span>
             <span className="text-[12.5px] font-medium text-mute">
               Fit {f.fit || suggested}{f.fit ? "" : " suggested"} · industry, size, source, research, contact
             </span>

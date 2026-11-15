@@ -1,8 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { STAGE_LABEL, stageClass } from "../lib/constants";
 import { percent, type Funnel } from "../lib/analytics";
 import type { Stage } from "../lib/types";
 import { cx } from "./ui";
+
+/** A sounding figure. Remounted when its count changes; whether it settles is fixed at mount. */
+function Figure({ count, settle }: { count: number; settle: boolean }) {
+  const animate = useRef(settle).current;
+  return (
+    <span className={cx("block text-[32px] font-bold leading-none tracking-[-0.02em] lg:text-[44px]",
+      animate && "animate-[figure-settle_420ms_var(--ease-out)]")}>
+      {count}
+    </span>
+  );
+}
 
 /**
  * The depth profile: eight stages as one strip that gets deeper in blue.
@@ -17,8 +28,8 @@ export function DepthStrip({ funnel, active, onSelect, counts }: {
   counts?: Partial<Record<Stage, number>>;
 }) {
   // The settle plays when a count changes, not when the page first loads.
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => { setMounted(true); }, []);
+  const mounted = useRef(false);
+  useEffect(() => { mounted.current = true; }, []);
   return (
     <div className="grid grid-cols-4 gap-y-1 overflow-hidden rounded-[16px] shadow-soft lg:flex lg:gap-0 lg:overflow-visible lg:shadow-none">
       {funnel.steps.map((step, i) => {
@@ -44,18 +55,14 @@ export function DepthStrip({ funnel, active, onSelect, counts }: {
               active && !selected && "opacity-60",
             )}
           >
-            <span key={count} className={cx("block text-[32px] font-bold leading-none tracking-[-0.02em] lg:text-[44px]",
-              mounted && "animate-[figure-settle_420ms_var(--ease-out)]")}>
-              {count}
-            </span>
+            <Figure key={count} count={count} settle={mounted.current} />
             <span className="mt-1 block text-[12.5px] font-medium italic lg:mt-1.5 lg:text-[13.5px]">{STAGE_LABEL[step.stage]}</span>
-            {/* Phones: the conversion sits under the stage name instead of on the boundary. */}
-            {step.conversion != null && (
-              <span className={cx("mt-1 rounded-full px-1.5 py-px text-[11.5px] font-bold leading-tight lg:hidden",
-                weakest ? "bg-magenta text-white" : "bg-card/85 text-navy")}>
-                {percent(step.conversion)} on{weakest ? ", weakest" : ""}
-              </span>
-            )}
+            {/* Phones: the conversion sits under the stage name instead of on the boundary.
+                The last stage keeps an empty slot so the row shares one baseline. */}
+            <span className={cx("mt-1 h-[18px] whitespace-nowrap rounded-full px-1.5 text-[11.5px] font-bold leading-[18px] lg:hidden",
+              step.conversion == null ? "invisible" : weakest ? "bg-magenta text-white" : "bg-card/85 text-navy")}>
+              {step.conversion != null && <>{percent(step.conversion)} on{weakest && <span className="sr-only">, the weakest step</span>}</>}
+            </span>
             {step.conversion != null && (
               <span
                 className={cx(
