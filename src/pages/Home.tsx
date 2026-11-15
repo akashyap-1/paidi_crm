@@ -111,7 +111,7 @@ export function Home() {
 
       <div className="mb-2 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-[13px] text-mute">
         <h2 className="text-[13.5px] font-bold text-navy">Depth profile</h2>
-        <span>Prospects in each stage. Select a stage to open it in the pipeline.</span>
+        <span>Figure: prospects in each stage. Pill: share that went on to the next stage. Magenta marks the weakest step. Select a stage to open it in the pipeline.</span>
       </div>
       <DepthStrip funnel={funnel} onSelect={(s) => navigate(s ? `/pipeline?stage=${s}` : "/pipeline")} />
 
