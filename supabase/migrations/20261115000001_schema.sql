@@ -18,10 +18,9 @@ create table public.allowed_users (
   created_at timestamptz not null default now()
 );
 
-insert into public.allowed_users (email, role, display_name) values
-  ('advikkashyap1@gmail.com', 'admin', 'Advik'),
-  ('neelsrinivasan0@gmail.com', 'admin', 'Neel'),
-  ('raphaelmuthu23@gmail.com', 'editor', 'Raphy');
+-- The allowlist rows themselves are not in this repository (it is public, and
+-- the login screen is designed not to reveal who has access). They are loaded
+-- from supabase/allowlist.local.sql, which is git-ignored. See README.
 
 create function private.jwt_email() returns text
 language sql stable set search_path = '' as $$

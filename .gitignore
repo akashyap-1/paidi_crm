@@ -7,9 +7,13 @@ dist/
 !.env.development
 !.env.demo
 *.local
+*.local.sql
 supabase/.temp/
 supabase/.branches/
 supabase/functions/.env
 .impeccable/config.local.json
 .DS_Store
 *.log
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/questions/

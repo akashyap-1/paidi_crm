@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { STAGE_LABEL, stageClass } from "../lib/constants";
 import { percent, type Funnel } from "../lib/analytics";
 import type { Stage } from "../lib/types";
@@ -15,6 +16,9 @@ export function DepthStrip({ funnel, active, onSelect, counts }: {
   /** Override the big figure (for example, counts under the current filters). */
   counts?: Partial<Record<Stage, number>>;
 }) {
+  // The settle plays when a count changes, not when the page first loads.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
   return (
     <div className="grid grid-cols-4 gap-y-1 overflow-hidden rounded-[16px] shadow-soft lg:flex lg:gap-0 lg:overflow-visible lg:shadow-none">
       {funnel.steps.map((step, i) => {
@@ -32,7 +36,7 @@ export function DepthStrip({ funnel, active, onSelect, counts }: {
               title: selected ? "Show all stages" : `Show only ${STAGE_LABEL[step.stage]}`,
             } : {})}
             className={cx(
-              "group relative flex h-[92px] flex-col items-center justify-center text-center transition-[filter,box-shadow] duration-150 lg:h-[108px] lg:flex-1",
+              "group relative flex h-[104px] flex-col items-center justify-center text-center transition-[filter,box-shadow] duration-150 lg:h-[108px] lg:flex-1",
               stageClass(step.stage),
               i === 0 && "lg:rounded-l-[16px]", i === funnel.steps.length - 1 && "lg:rounded-r-[16px]",
               onSelect && "cursor-pointer hover:brightness-[1.04]",
@@ -40,14 +44,22 @@ export function DepthStrip({ funnel, active, onSelect, counts }: {
               active && !selected && "opacity-60",
             )}
           >
-            <span key={count} className="block animate-[figure-settle_420ms_var(--ease-out)] text-[34px] font-bold leading-none tracking-[-0.02em] lg:text-[44px]">
+            <span key={count} className={cx("block text-[32px] font-bold leading-none tracking-[-0.02em] lg:text-[44px]",
+              mounted && "animate-[figure-settle_420ms_var(--ease-out)]")}>
               {count}
             </span>
-            <span className="mt-1.5 block text-[12.5px] font-medium italic lg:text-[13.5px]">{STAGE_LABEL[step.stage]}</span>
+            <span className="mt-1 block text-[12.5px] font-medium italic lg:mt-1.5 lg:text-[13.5px]">{STAGE_LABEL[step.stage]}</span>
+            {/* Phones: the conversion sits under the stage name instead of on the boundary. */}
+            {step.conversion != null && (
+              <span className={cx("mt-1 rounded-full px-1.5 py-px text-[11.5px] font-bold leading-tight lg:hidden",
+                weakest ? "bg-magenta text-white" : "bg-card/85 text-navy")}>
+                {percent(step.conversion)} on{weakest ? ", weakest" : ""}
+              </span>
+            )}
             {step.conversion != null && (
               <span
                 className={cx(
-                  "absolute right-0 top-1/2 z-[2] hidden -translate-y-1/2 translate-x-1/2 rounded-full px-2.5 py-1 text-[13px] font-bold leading-none shadow-soft lg:block",
+                  "absolute right-0 top-1/2 z-[2] hidden -translate-y-1/2 translate-x-1/2 rounded-full px-2.5 py-1.5 text-[16px] font-bold leading-none shadow-soft lg:block",
                   weakest ? "bg-magenta text-white" : "bg-card text-navy",
                 )}
                 title={`${percent(step.conversion)} of prospects that reached ${STAGE_LABEL[step.stage]} went on to ${STAGE_LABEL[funnel.steps[i + 1].stage]}`}
@@ -60,7 +72,6 @@ export function DepthStrip({ funnel, active, onSelect, counts }: {
                 )}
               </span>
             )}
-            {weakest && <span className="absolute right-1.5 top-1.5 rounded-full bg-magenta px-1.5 py-px text-[10px] font-bold text-white lg:hidden">Weakest {percent(step.conversion)}</span>}
           </Tag>
         );
       })}

@@ -28,11 +28,13 @@ One deliberate difference from the original brief: follow-up task creation runs 
 
 Sign-in is a Supabase magic link (email OTP). No passwords, no Google sign-in.
 
-| Email | Role | Can do |
+| Person | Role | Can do |
 |---|---|---|
-| advikkashyap1@gmail.com | admin | Everything, including settings, deleting records, connecting Gmail |
-| neelsrinivasan0@gmail.com | admin | Same |
-| raphaelmuthu23@gmail.com | editor | Create and edit records and tasks. Cannot delete, change settings, or connect Gmail |
+| Advik | admin | Everything, including settings, deleting records, connecting Gmail |
+| Neel | admin | Same |
+| Raphy | editor | Create and edit records and tasks. Cannot delete, change settings, or connect Gmail |
+
+The actual email addresses are deliberately not in this repository, because it is public and the login screen is built not to reveal who has access. They live in `supabase/allowlist.local.sql` (git-ignored, on Advik's machine) and in the `allowed_users` table.
 
 The allowlist is enforced on the server in four places:
 
@@ -43,7 +45,7 @@ The allowlist is enforced on the server in four places:
 
 The login screen shows the same "check your email" message for any address.
 
-To change who has access, edit `public.allowed_users` in the Supabase SQL editor, then create the user under Authentication → Users (or delete them there).
+To change who has access, edit `supabase/allowlist.local.sql` and run it (`npx supabase db query --remote -f supabase/allowlist.local.sql --yes`), or edit `public.allowed_users` in the Supabase SQL editor. Then create the user under Authentication → Users (or delete them there).
 
 **Email limits.** Supabase's built-in email sender allows only about 2 emails per hour for the whole project, and a link must be opened in the same browser that asked for it. If sign-in emails stop arriving, wait an hour. To lift the limit, add a custom SMTP provider (Resend, Postmark, SES) under Authentication → Emails → SMTP Settings; after that you can also uncomment the `magic_link` template block in `supabase/config.toml` to send a branded email that includes a typed code.
 
@@ -139,7 +141,7 @@ If the project ever has to be rebuilt:
 
 1. `npx supabase login`, then `npx supabase projects create paidi-crm --org-id <org> --db-password <pw> --region us-east-1`.
 2. Put the new project ref in `supabase/config.toml`, and the new URL and anon key in `.env.production`, `.env.development` and `.env.demo`.
-3. `npx supabase link --project-ref <ref>`, `npx supabase db push --remote`, `npx supabase config push --yes`, `npx supabase functions deploy --yes`.
+3. `npx supabase link --project-ref <ref>`, `npx supabase db push --remote`, then load the allowlist (copy `supabase/allowlist.example.sql` to `allowlist.local.sql`, fill it in, run it), `npx supabase config push --yes`, `npx supabase functions deploy --yes`.
 4. Function secrets: `CRON_SECRET` (random hex), `TOKEN_ENCRYPTION_KEY` (32 random bytes, base64), `APP_URL` (the Pages URL, no trailing slash), `ANTHROPIC_API_KEY`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`.
 5. Cron secrets in Vault (SQL editor), using the same `CRON_SECRET`:
    `select vault.create_secret('https://<ref>.supabase.co', 'project_url'); select vault.create_secret('<CRON_SECRET>', 'cron_secret');`

@@ -2,7 +2,7 @@ import {
   DndContext, DragOverlay, KeyboardSensor, PointerSensor, TouchSensor, useDraggable, useDroppable,
   useSensor, useSensors, type DragEndEvent, type DragStartEvent,
 } from "@dnd-kit/core";
-import { ArrowDown, ArrowUp, Plus, Search } from "lucide-react";
+import { ArrowDown, ArrowUp, Plus, Search, SlidersHorizontal } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { DepthStrip } from "../components/DepthStrip";
@@ -46,6 +46,7 @@ export function Pipeline() {
   const [lostFor, setLostFor] = useState<Company | null>(null);
   const [lostReason, setLostReason] = useState("");
   const [dragging, setDragging] = useState<Row | null>(null);
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   const setParam = (key: string, value: string | null) => {
     const next = new URLSearchParams(params);
@@ -126,16 +127,8 @@ export function Pipeline() {
 
   const boardStages = stageFilter ? [stageFilter] : [...FUNNEL_STAGES, ...SIDE_STAGES];
 
-  return (
+  const strip = (
     <>
-      <PageHeader
-        title="Pipeline"
-        action={<button className="btn btn-primary hidden lg:inline-flex" onClick={quick.addProspect}><Plus size={16} aria-hidden="true" /> Add prospect</button>}
-      >
-        <Tabs label="View" value={view} onChange={(v) => setParam("view", v === "board" ? null : v)}
-          options={[{ value: "board", label: "Board" }, { value: "table", label: "Table" }]} />
-      </PageHeader>
-
       <div className="mb-2 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-[13px] text-mute">
         <h2 className="text-[13.5px] font-bold text-navy">Depth profile</h2>
         <span>Figure: prospects in each stage{filtering ? " under these filters" : ""}. Pill: share that went on to the next stage, all time.</span>
@@ -148,9 +141,27 @@ export function Pipeline() {
           ))}
         </span>
       </div>
-      <DepthStrip funnel={funnel} counts={counts} active={stageFilter} onSelect={(s) => setParam("stage", s)} />
+      <div className="mb-5">
+        <DepthStrip funnel={funnel} counts={counts} active={stageFilter} onSelect={(s) => setParam("stage", s)} />
+      </div>
+    </>
+  );
 
-      <div className="mb-4 mt-5 flex flex-wrap items-center gap-2">
+  // Filters sit above the strip because they change its figures. On phones the
+  // selects fold behind one control so the board starts higher.
+  const activeFilters = [owner, industry, size, minFit, last, view === "table" ? stageFilter : null].filter(Boolean).length;
+  const filters = (
+    <div className="mb-4 flex flex-wrap items-center gap-2">
+      <label className="relative order-first w-full sm:order-last sm:ml-auto sm:w-[240px]">
+        <span className="sr-only">Search companies and contacts</span>
+        <Search size={15} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-mute" aria-hidden="true" />
+        <input className="input !h-9 !pl-9" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search companies, contacts" />
+      </label>
+      <button className={cx("btn btn-sm !h-9 sm:hidden", activeFilters > 0 && "!border-depth-7 !bg-depth-1")}
+        aria-expanded={filtersOpen} onClick={() => setFiltersOpen((o) => !o)}>
+        <SlidersHorizontal size={15} aria-hidden="true" /> Filters{activeFilters > 0 ? ` (${activeFilters})` : ""}
+      </button>
+      <div className={cx("flex-wrap items-center gap-2 sm:flex", filtersOpen ? "flex w-full" : "hidden")}>
         <FilterSelect label="Owner" value={owner} onChange={setOwner}
           options={crm.team.map((m) => ({ value: m.id, label: m.display_name }))} />
         <FilterSelect label="Industry" value={industry} onChange={setIndustry} options={industries.map((i) => ({ value: i, label: i }))} />
@@ -168,12 +179,21 @@ export function Pipeline() {
             Clear filters
           </button>
         )}
-        <label className="relative ml-auto w-full sm:w-[240px]">
-          <span className="sr-only">Search companies and contacts</span>
-          <Search size={15} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-mute" aria-hidden="true" />
-          <input className="input !h-9 !pl-9" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search companies, contacts" />
-        </label>
       </div>
+    </div>
+  );
+
+  return (
+    <>
+      <PageHeader
+        title="Pipeline"
+        action={<button className="btn btn-primary hidden lg:inline-flex" onClick={quick.addProspect}><Plus size={16} aria-hidden="true" /> Add prospect</button>}
+      >
+        <Tabs label="View" value={view} onChange={(v) => setParam("view", v === "board" ? null : v)}
+          options={[{ value: "board", label: "Board" }, { value: "table", label: "Table" }]} />
+      </PageHeader>
+      {filters}
+      {strip}
 
       {crm.companies.length === 0 ? (
         <EmptyState title="No prospects yet"
@@ -184,11 +204,11 @@ export function Pipeline() {
         <EmptyState title="Nothing matches these filters">Loosen a filter or clear them to see the whole pipeline.</EmptyState>
       ) : view === "board" ? (
         <DndContext sensors={sensors} onDragStart={onDragStart} onDragEnd={onDragEnd} onDragCancel={() => setDragging(null)}>
-          {/* From 1280px the eight funnel lanes sit directly under their strip segments;
+          {/* From 1400px the eight funnel lanes sit directly under their strip segments;
               Nurture and Lost get their own row. Narrower screens scroll sideways. */}
           <div className={cx(
             "relative -mx-4 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-3 lg:mx-0 lg:snap-none lg:px-0",
-            !stageFilter && "xl:grid xl:grid-cols-8 xl:overflow-visible",
+            !stageFilter && "min-[1400px]:grid min-[1400px]:grid-cols-8 min-[1400px]:overflow-visible",
           )}>
             {boardStages.map((stage) => (
               <Lane key={stage} stage={stage} rows={filtered.filter((r) => r.company.stage === stage)} crm={crm}
@@ -253,8 +273,8 @@ function Lane({ stage, rows, crm, wide, side }: { stage: Stage; rows: Row[]; crm
       ref={setNodeRef} aria-label={`${STAGE_LABEL[stage]}, ${rows.length} prospects`}
       className={cx(
         "flex shrink-0 snap-start flex-col overflow-hidden rounded-[14px] bg-lane transition-shadow duration-150",
-        wide ? "w-full" : "w-[78vw] sm:w-[240px] lg:w-auto lg:min-w-[168px] lg:flex-1 xl:min-w-0",
-        side && "xl:col-span-4",
+        wide ? "w-full" : "w-[78vw] sm:w-[240px] lg:w-auto lg:flex-1 lg:max-[1399px]:min-w-[168px] min-[1400px]:min-w-0",
+        side && "min-[1400px]:col-span-4",
         isOver && "shadow-[inset_0_0_0_2px_var(--color-depth-7)]",
       )}
     >
@@ -264,7 +284,7 @@ function Lane({ stage, rows, crm, wide, side }: { stage: Stage; rows: Row[]; crm
         <span className="text-[12.5px] font-semibold text-mute">{rows.length}</span>
       </header>
       <div className={cx("flex min-h-[72px] flex-1 gap-1.5 px-1.5 pb-2",
-        wide ? "flex-row flex-wrap content-start" : side ? "flex-col xl:flex-row xl:flex-wrap xl:content-start" : "flex-col")}>
+        wide ? "flex-row flex-wrap content-start" : side ? "flex-col min-[1400px]:flex-row min-[1400px]:flex-wrap min-[1400px]:content-start" : "flex-col")}>
         {sorted.map((row) => <DraggableCard key={row.company.id} row={row} crm={crm} wide={wide} side={side} />)}
         {rows.length === 0 && <p className="px-2 py-3 text-[12.5px] text-mute">Drop a prospect here</p>}
       </div>
@@ -281,7 +301,7 @@ function DraggableCard({ row, crm, wide, side }: { row: Row; crm: Crm; wide: boo
       aria-roledescription="Draggable prospect"
       onClick={() => navigate(`/company/${row.company.id}`)}
       onKeyDown={(e) => { if (e.key === "Enter") navigate(`/company/${row.company.id}`); listeners?.onKeyDown?.(e); }}
-      className={cx("cursor-grab touch-manipulation active:cursor-grabbing", wide && "w-full sm:w-[232px]", side && "xl:w-[200px]", isDragging && "opacity-30")}
+      className={cx("cursor-grab touch-manipulation active:cursor-grabbing", wide && "w-full sm:w-[232px]", side && "min-[1400px]:w-[200px]", isDragging && "opacity-30")}
     >
       <CardBody row={row} crm={crm} />
     </div>
@@ -295,22 +315,24 @@ function CardBody({ row, crm, lifted }: { row: Row; crm: Crm; lifted?: boolean }
       "rounded-[11px] border border-line bg-card px-2.5 py-2 transition-shadow duration-150 hover:shadow-soft",
       lifted && "shadow-lift",
     )}>
-      {row.overdue && <span className="chip chip-alert mb-1.5 !h-[19px] !px-2 !text-[11px]">Follow-up overdue</span>}
+      {row.overdue && <span className="chip chip-alert mb-1.5 !h-[19px] !px-2 !text-[11px]" title="No reply, and the follow-up window has passed">Follow-up due</span>}
       {c.do_not_contact && <span className="chip chip-plain mb-1.5 !h-[19px] !px-2 !text-[11px]">Do not contact</span>}
-      <h4 className="text-[13.5px] font-bold leading-tight">{c.name}</h4>
-      {row.contactName && (
-        <p className="mt-0.5 truncate text-[12.5px]">{row.contactName}{row.contactTitle ? `, ${row.contactTitle}` : ""}</p>
-      )}
-      <p className="mt-0.5 truncate text-[12px] text-mute">
-        {[c.industry, c.employee_count ? `${c.employee_count} people` : null].filter(Boolean).join(" · ") || "No details yet"}
+      <h4 className="text-[13.5px] font-bold leading-tight [overflow-wrap:break-word]">{c.name}</h4>
+      <div className="mt-0.5 flex items-center gap-1.5">
+        <p className="min-w-0 flex-1 truncate text-[12.5px]" title={row.contactTitle ? `${row.contactName}, ${row.contactTitle}` : row.contactName ?? undefined}>
+          {row.contactName ?? <span className="text-mute">No contact yet</span>}
+        </p>
+        <Avatar member={c.owner_id ? crm.member.get(c.owner_id) : null} size={19} />
+      </div>
+      <p className="mt-0.5 truncate text-[12px] text-mute" title={c.employee_count ? `${c.employee_count} people` : undefined}>
+        {[c.industry, c.employee_count].filter(Boolean).join(" · ") || "No details yet"}
       </p>
-      <div className="mt-2 flex items-center gap-2 border-t border-[#ebe1c6] pt-2 text-[11.5px] text-mute">
+      <div className="mt-2 flex items-center gap-1.5 border-t border-[#ebe1c6] pt-2 text-[11.5px] text-mute">
         <FitDot score={c.fit_score} />
         <TouchSlots used={row.touches} replied={row.replied} />
         <span className="ml-auto whitespace-nowrap" title={`Last touch: ${relativeDay(c.last_contacted_at)}`}>
           {relativeDay(c.last_contacted_at).replace(" ago", "")}
         </span>
-        <Avatar member={c.owner_id ? crm.member.get(c.owner_id) : null} size={19} />
       </div>
     </article>
   );

@@ -4,11 +4,10 @@
 import { writeFileSync } from "node:fs";
 import { COMPANIES, REVIEW_THREADS, TASKS, TEMPLATES, type Who } from "../src/demo/spec.ts";
 
-const EMAIL: Record<Who, string> = {
-  advik: "advikkashyap1@gmail.com", neel: "neelsrinivasan0@gmail.com", raphy: "raphaelmuthu23@gmail.com",
-};
+// Team members are looked up by display name so no real address lives in this repository.
+const NAME: Record<Who, string> = { advik: "Advik", neel: "Neel", raphy: "Raphy" };
 const q = (v: string | null | undefined) => (v == null ? "null" : `'${v.replace(/'/g, "''")}'`);
-const who = (w: Who) => `(select id from public.allowed_users where email = ${q(EMAIL[w])})`;
+const who = (w: Who) => `(select id from public.allowed_users where display_name = ${q(NAME[w])})`;
 const ago = (days: number, hour = 10) => `(date_trunc('day', now()) - interval '${days} days' + interval '${hour} hours')`;
 const company = (name: string) => `(select id from public.companies where name = ${q(name)} and is_sample)`;
 const contact = (name: string) => `(select id from public.contacts where name = ${q(name)} and company_id in (select id from public.companies where is_sample) limit 1)`;

@@ -4,9 +4,9 @@ import type { Stage, Tables } from "../lib/types";
 import { COMPANIES, REVIEW_THREADS, TASKS, TEMPLATES, type Who } from "./spec";
 
 export const DEMO_MEMBERS: Tables["allowed_users"][] = [
-  { id: "m-advik", email: "advikkashyap1@gmail.com", role: "admin", display_name: "Advik" },
-  { id: "m-neel", email: "neelsrinivasan0@gmail.com", role: "admin", display_name: "Neel" },
-  { id: "m-raphy", email: "raphaelmuthu23@gmail.com", role: "editor", display_name: "Raphy" },
+  { id: "m-advik", email: "advik@paidi.example", role: "admin", display_name: "Advik" },
+  { id: "m-neel", email: "neel@paidi.example", role: "admin", display_name: "Neel" },
+  { id: "m-raphy", email: "raphy@paidi.example", role: "editor", display_name: "Raphy" },
 ];
 const member = (who: Who) => `m-${who}`;
 const ago = (days: number, hour = 10) => {
@@ -125,9 +125,9 @@ export function buildDemoStore(): DemoStore {
   });
 
   store.gmail_accounts.push(
-    { id: "g-advik", team_member_id: "m-advik", email: "advikkashyap1@gmail.com", kind: "personal", status: "active",
+    { id: "g-advik", team_member_id: "m-advik", email: "advik@paidi.example", kind: "personal", status: "active",
       last_error: null, last_synced_at: ago(0, new Date().getHours()), backfill_days: 90, backfill_pending: false, connected_at: ago(20) },
-    { id: "g-neel", team_member_id: "m-neel", email: "neelsrinivasan0@gmail.com", kind: "personal", status: "active",
+    { id: "g-neel", team_member_id: "m-neel", email: "neel@paidi.example", kind: "personal", status: "active",
       last_error: null, last_synced_at: ago(0, new Date().getHours()), backfill_days: 90, backfill_pending: false, connected_at: ago(20) },
   );
   REVIEW_THREADS.forEach((t, i) => {

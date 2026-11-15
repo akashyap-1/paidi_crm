@@ -1,7 +1,7 @@
 // The three capture forms, each in a Sheet: add a prospect, log a touch, add or edit a task.
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { useAuth } from "../auth/AuthProvider";
-import { suggestFitScore } from "../lib/analytics";
+import { followUpOverdue, suggestFitScore } from "../lib/analytics";
 import {
   INDUSTRIES, INTERACTION_LABEL, PRIORITY_LABEL, SOURCE_LABEL, TASK_STATUS_LABEL, TEMPLATE_TYPE_LABEL,
 } from "../lib/constants";
@@ -78,13 +78,30 @@ export function ProspectSheet({ open, onClose, onCreated }: {
       </>}
     >
       <form id="prospect-form" onSubmit={submit} className="space-y-7">
-        <fieldset className="grid gap-x-4 gap-y-3.5 sm:grid-cols-2">
-          <legend className="section-title mb-3">Company</legend>
-          <Field label="Company name" className="sm:col-span-2" error={error}
+        {/* The five fields that make a prospect worth contacting come first. */}
+        <div className="grid gap-x-4 gap-y-3.5 sm:grid-cols-2">
+          <Field label="Company name" error={error}
             hint={duplicate ? `${duplicate.name} is already in the CRM.` : undefined}>
             <input className="input" value={f.name} onChange={set("name")} aria-invalid={!!error} autoComplete="off" />
           </Field>
           <Field label="Website"><input className="input" value={f.website} onChange={set("website")} placeholder="example.com" inputMode="url" /></Field>
+          <Field label="Personalization hook" className="sm:col-span-2" hint="The post or news that caught your eye.">
+            <textarea className="input" rows={2} value={f.hook} onChange={set("hook")} />
+          </Field>
+          <Field label="Contact name"><input className="input" value={f.contactName} onChange={set("contactName")} autoComplete="off" /></Field>
+          <Field label="Contact email"><input className="input" type="email" value={f.email} onChange={set("email")} inputMode="email" autoComplete="off" /></Field>
+        </div>
+
+        <details className="group rounded-[14px] border border-line bg-card/60">
+          <summary className="flex h-11 cursor-pointer list-none items-center justify-between rounded-[14px] px-4 text-[14px] font-bold hover:bg-sand [&::-webkit-details-marker]:hidden">
+            More details
+            <span className="text-[12.5px] font-medium text-mute">
+              Fit {f.fit || suggested}{f.fit ? "" : " suggested"} · industry, size, source, research, contact
+            </span>
+          </summary>
+          <div className="space-y-7 px-4 pb-4 pt-2">
+        <fieldset className="grid gap-x-4 gap-y-3.5 sm:grid-cols-2">
+          <legend className="section-title mb-3">Company</legend>
           <Field label="Location"><input className="input" value={f.location} onChange={set("location")} placeholder="Philadelphia, PA" /></Field>
           <Field label="Industry">
             <input className="input" list="industries" value={f.industry} onChange={set("industry")} />
@@ -116,23 +133,20 @@ export function ProspectSheet({ open, onClose, onCreated }: {
 
         <fieldset className="grid gap-x-4 gap-y-3.5 sm:grid-cols-2">
           <legend className="section-title mb-3">Research</legend>
-          <Field label="Personalization hook" className="sm:col-span-2" hint="The post or news that caught your eye.">
-            <textarea className="input" rows={2} value={f.hook} onChange={set("hook")} />
-          </Field>
           <Field label="Hook link"><input className="input" value={f.hookUrl} onChange={set("hookUrl")} inputMode="url" /></Field>
           <Field label="Common ground"><input className="input" value={f.common} onChange={set("common")} placeholder="Shared connection, school, city" /></Field>
           <Field label="Proposed tool idea" className="sm:col-span-2"><textarea className="input" rows={2} value={f.idea} onChange={set("idea")} /></Field>
         </fieldset>
 
         <fieldset className="grid gap-x-4 gap-y-3.5 sm:grid-cols-2">
-          <legend className="section-title mb-3">First contact</legend>
-          <Field label="Name"><input className="input" value={f.contactName} onChange={set("contactName")} autoComplete="off" /></Field>
+          <legend className="section-title mb-3">Contact</legend>
           <Field label="Title"><input className="input" value={f.title} onChange={set("title")} /></Field>
-          <Field label="Email"><input className="input" type="email" value={f.email} onChange={set("email")} inputMode="email" autoComplete="off" /></Field>
           <Field label="Phone"><input className="input" value={f.phone} onChange={set("phone")} inputMode="tel" /></Field>
           <Field label="LinkedIn"><input className="input" value={f.linkedin} onChange={set("linkedin")} inputMode="url" /></Field>
           <Field label="Introduced by"><input className="input" value={f.referral} onChange={set("referral")} /></Field>
         </fieldset>
+          </div>
+        </details>
       </form>
     </Sheet>
   );
@@ -143,7 +157,7 @@ export function ProspectSheet({ open, onClose, onCreated }: {
 const CALL_TYPES: InteractionType[] = ["call", "meeting"];
 
 export function TouchSheet({ open, onClose, companyId }: { open: boolean; onClose: () => void; companyId?: string | null }) {
-  const { companies, contacts, templates, team } = useCrm();
+  const { companies, contacts, templates, team, interactions, followupDays } = useCrm();
   const { member } = useAuth();
   const write = useWrite();
   const { busy, run } = useAction();
@@ -158,8 +172,26 @@ export function TouchSheet({ open, onClose, companyId }: { open: boolean; onClos
   const set = (k: keyof typeof blank) => (e: { target: { value: string } }) => setF((p) => ({ ...p, [k]: e.target.value }));
 
   const companyContacts = contacts.filter((c) => c.company_id === f.company);
-  const sorted = useMemo(() => [...companies].sort((a, b) => a.name.localeCompare(b.name)), [companies]);
+  // Right after a call you want the prospect you were chasing: follow-ups due
+  // first, then whoever was touched most recently, then everyone else by name.
+  const groups = useMemo(() => {
+    const due = companies.filter((c) => followUpOverdue(c, interactions, followupDays));
+    const dueIds = new Set(due.map((c) => c.id));
+    const recent = companies
+      .filter((c) => !dueIds.has(c.id) && c.last_contacted_at)
+      .sort((a, b) => (b.last_contacted_at ?? "").localeCompare(a.last_contacted_at ?? ""))
+      .slice(0, 8);
+    const recentIds = new Set(recent.map((c) => c.id));
+    const rest = companies
+      .filter((c) => !dueIds.has(c.id) && !recentIds.has(c.id))
+      .sort((a, b) => a.name.localeCompare(b.name));
+    return [
+      { label: "Follow-up due", items: due }, { label: "Recently touched", items: recent },
+      { label: "Everyone else", items: rest },
+    ].filter((g) => g.items.length > 0);
+  }, [companies, interactions, followupDays]);
   const showIntel = CALL_TYPES.includes(f.type);
+  const intelOpen = typeof window === "undefined" || window.matchMedia("(min-width: 640px)").matches;
   const usable = templates.filter((t) => t.active || t.id === f.template);
 
   const submit = (e: FormEvent) => {
@@ -196,7 +228,11 @@ export function TouchSheet({ open, onClose, companyId }: { open: boolean; onClos
         <Field label="Company" error={error}>
           <select className="input" value={f.company} onChange={(e) => setF((p) => ({ ...p, company: e.target.value, contact: "" }))} aria-invalid={!!error}>
             <option value="">Choose…</option>
-            {sorted.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+            {groups.map((g) => (
+              <optgroup key={g.label} label={g.label}>
+                {g.items.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+              </optgroup>
+            ))}
           </select>
         </Field>
         <div className="grid grid-cols-2 gap-3.5">
@@ -227,8 +263,12 @@ export function TouchSheet({ open, onClose, companyId }: { open: boolean; onClos
         <Field label="Summary"><textarea className="input" rows={3} value={f.summary} onChange={set("summary")} placeholder="What was said, in a sentence or two" /></Field>
         <Field label="Outcome"><input className="input" value={f.outcome} onChange={set("outcome")} placeholder="Call back Thursday" /></Field>
         {showIntel && (
-          <fieldset className="space-y-3.5 border-t border-line pt-4">
-            <legend className="section-title float-left mb-3 w-full">Call intel</legend>
+          <details open={intelOpen} className="rounded-[14px] border border-line bg-card/60">
+            <summary className="flex h-11 cursor-pointer list-none items-center justify-between rounded-[14px] px-4 text-[14px] font-bold hover:bg-sand [&::-webkit-details-marker]:hidden">
+              Call intel
+              <span className="text-[12.5px] font-medium text-mute">Why they took it, pain points, objections</span>
+            </summary>
+            <div className="space-y-3.5 px-4 pb-4 pt-1">
             <Field label="Why they took the call" hint="Ask: what caught your attention?"><textarea className="input" rows={2} value={f.why} onChange={set("why")} /></Field>
             <Field label="Pain points"><textarea className="input" rows={2} value={f.pain} onChange={set("pain")} /></Field>
             <Field label="Objections or reasons for no"><textarea className="input" rows={2} value={f.objections} onChange={set("objections")} /></Field>
@@ -236,7 +276,8 @@ export function TouchSheet({ open, onClose, companyId }: { open: boolean; onClos
             <Field label="Asks" hint="For example: send a one-pager."><input className="input" value={f.asks} onChange={set("asks")} /></Field>
             <Field label="Next step"><input className="input" value={f.next} onChange={set("next")} /></Field>
             <Field label="Recording link"><input className="input" value={f.recording} onChange={set("recording")} inputMode="url" /></Field>
-          </fieldset>
+            </div>
+          </details>
         )}
       </form>
     </Sheet>

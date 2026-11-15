@@ -89,7 +89,10 @@ export function Shell() {
         <div className="flex min-w-0 flex-1 flex-col">
           {/* Mobile top bar */}
           <header className="sticky top-0 z-30 flex h-14 items-center justify-between bg-navy px-4 text-buff lg:hidden">
-            <p className="text-[17px] font-bold tracking-[0.04em]">PAIDI CRM</p>
+            <p className="flex items-center gap-2 text-[17px] font-bold tracking-[0.04em]">
+              PAIDI CRM
+              {DEMO && <span className="chip chip-warn !h-5 tracking-normal">Demo data</span>}
+            </p>
             <button className="btn btn-primary btn-sm" onClick={addProspect}><Plus size={15} aria-hidden="true" /> Prospect</button>
           </header>
 

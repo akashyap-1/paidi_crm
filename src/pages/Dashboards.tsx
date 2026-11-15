@@ -34,7 +34,8 @@ const MIN_SEGMENT = 3;
 const MAX_CHART_WEEKS = 26;
 
 /** One fixed colour per person, always shown next to their name. */
-const PERSON_COLORS = ["var(--color-navy)", "var(--color-depth-5)", "var(--color-green)"];
+// Green is reserved for "done", so the third person gets an ochre from the buff family.
+const PERSON_COLORS = ["var(--color-navy)", "var(--color-depth-5)", "#a67c1f"];
 const NOBODY = "none";
 
 const ACTIVITY_GROUPS: { label: string; types: InteractionType[] }[] = [

@@ -260,7 +260,7 @@ export function CompanyDetail() {
                     </div>
                     {c.title && <p className="text-mute">{c.title}</p>}
                     <p className="mt-0.5 flex flex-wrap gap-x-3 gap-y-0.5">
-                      {c.email && <a className="link break-all" href={`mailto:${c.email}`}>{c.email}</a>}
+                      {c.email && <a className="link block truncate" title={c.email} href={`mailto:${c.email}`}>{c.email}</a>}
                       {c.phone && <a className="link" href={`tel:${c.phone}`}>{c.phone}</a>}
                       {c.linkedin_url && <a className="link" href={href(c.linkedin_url)} target="_blank" rel="noreferrer">LinkedIn</a>}
                     </p>
