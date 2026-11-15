@@ -1,0 +1,46 @@
+project_id = "plenngzosfcqmberlwrt"
+
+[api]
+schemas = ["public", "graphql_public"]
+
+[auth]
+site_url = "https://akashyap-1.github.io/paidi_crm/"
+additional_redirect_urls = [
+  "https://akashyap-1.github.io/paidi_crm/",
+  "http://localhost:5173/",
+]
+# Public sign-ups are off: only the three pre-created allowlisted users exist.
+enable_signup = false
+enable_anonymous_sign_ins = false
+
+[auth.email]
+enable_confirmations = true
+otp_expiry = 3600
+max_frequency = "60s"
+
+# Custom email templates need a custom SMTP sender (not available with the
+# built-in sender on the free plan). After adding SMTP, uncomment this to send
+# a branded email that also shows the sign-in code:
+# [auth.email.template.magic_link]
+# subject = "Your PAIDI CRM sign-in link"
+# content_path = "./supabase/templates/magic_link.html"
+
+[auth.rate_limit]
+# Supabase's built-in email sender allows very few emails per hour.
+email_sent = 2
+token_verifications = 30
+
+[auth.hook.before_user_created]
+enabled = true
+uri = "pg-functions://postgres/public/hook_before_user_created"
+
+# Each function checks the caller itself (admin JWT, cron secret, or one-time
+# OAuth state), so the gateway-level JWT check is off.
+[functions.gmail-oauth-start]
+verify_jwt = false
+
+[functions.gmail-oauth-callback]
+verify_jwt = false
+
+[functions.gmail-sync]
+verify_jwt = false

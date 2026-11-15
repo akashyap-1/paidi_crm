@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+!.env.production
+!.env.development
+!.env.demo
+*.local
+supabase/.temp/
+supabase/.branches/
+supabase/functions/.env
+.impeccable/config.local.json
+.DS_Store
+*.log
