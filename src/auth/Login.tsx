@@ -76,6 +76,12 @@ export function Login({ notAllowed, onSignOut }: { notAllowed?: boolean; onSignO
               <button className="btn btn-primary mt-4 w-full" disabled={busy}>
                 {busy ? "Sending…" : "Send sign-in link"}
               </button>
+              <button
+                type="button" className="btn btn-ghost mt-2 w-full"
+                onClick={(e) => { if (e.currentTarget.form?.reportValidity()) setSent(true); }}
+              >
+                I already have a code
+              </button>
             </form>
           ) : (
             <form onSubmit={verify}>
