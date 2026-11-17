@@ -36,25 +36,24 @@ Sign-in is a Supabase magic link (email OTP). No passwords, no Google sign-in.
 
 The actual email addresses are deliberately not in this repository, because it is public and the login screen is built not to reveal who has access. They live in `supabase/allowlist.local.sql` (git-ignored, on Advik's machine) and in the `allowed_users` table.
 
-The allowlist is enforced on the server in four places:
+Sign-ups are on (`enable_signup = true`), so an allowlisted person's first login creates their account. Anyone else is turned away. The allowlist is enforced on the server in three places:
 
-1. Public sign-ups are off (`enable_signup = false`), and only these three users exist.
-2. The `before_user_created` Auth hook (`public.hook_before_user_created`) rejects any email not in `allowed_users`.
-3. A trigger on `auth.users` rejects the same, in case the hook is ever switched off.
-4. Every table's RLS policy requires the caller's JWT email to be in `allowed_users`; roles come from that table.
+1. The `before_user_created` Auth hook (`public.hook_before_user_created`) rejects any email not in `allowed_users`.
+2. A trigger on `auth.users` rejects the same, in case the hook is ever switched off.
+3. Every table's RLS policy requires the caller's JWT email to be in `allowed_users`; roles come from that table.
 
 The login screen shows the same "check your email" message for any address.
 
-To change who has access, edit `supabase/allowlist.local.sql` and run it (`npx supabase db query --remote -f supabase/allowlist.local.sql --yes`), or edit `public.allowed_users` in the Supabase SQL editor. Then create the user under Authentication → Users (or delete them there).
+To change who has access, edit `supabase/allowlist.local.sql` and run it (`npx supabase db query --remote -f supabase/allowlist.local.sql --yes`), or edit `public.allowed_users` in the Supabase SQL editor. They can then sign in; their first login creates the account. To remove someone, delete their row and their user under Authentication → Users.
 
-**Email limits.** Supabase's built-in email sender allows only about 2 emails per hour for the whole project, and a link must be opened in the same browser that asked for it. If sign-in emails stop arriving, wait an hour. To lift the limit, add a custom SMTP provider (Resend, Postmark, SES) under Authentication → Emails → SMTP Settings; after that you can also uncomment the `magic_link` template block in `supabase/config.toml` to send a branded email that includes a typed code.
+**Email limits.** Supabase's built-in email sender only delivers to members of the Supabase organization (anyone else silently gets nothing) and allows only about 2 emails per hour for the whole project, and a link must be opened in the same browser that asked for it. If sign-in emails stop arriving, wait an hour. To lift the limit, add a custom SMTP provider (Resend, Postmark, SES) under Authentication → Emails → SMTP Settings; after that you can also uncomment the `magic_link` template block in `supabase/config.toml` to send a branded email that includes a typed code.
 
 ## What is already set up
 
 Done from this machine with the Supabase and GitHub CLIs:
 
 - Supabase project created, migrations applied, sample data seeded.
-- Auth: sign-ups off, allowlist hook on, Site URL and redirect URLs set to the GitHub Pages URL, three users created.
+- Auth: sign-ups limited to the allowlist by the hook, Site URL and redirect URLs set to the GitHub Pages URL, three users created.
 - Edge Functions deployed; `CRON_SECRET`, `TOKEN_ENCRYPTION_KEY` and `APP_URL` set as function secrets; `project_url` and `cron_secret` stored in Vault for pg_cron.
 - pg_cron jobs: `paidi-gmail-sync` (every 15 minutes), `paidi-followups` (hourly), `paidi-oauth-state-cleanup` (hourly).
 

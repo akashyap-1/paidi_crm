@@ -9,8 +9,11 @@ additional_redirect_urls = [
   "https://akashyap-1.github.io/paidi_crm/",
   "http://localhost:5173/",
 ]
-# Public sign-ups are off: only the three pre-created allowlisted users exist.
-enable_signup = false
+# Sign-ups are on, but the before_user_created hook (and the enforce_allowlist
+# trigger behind it) rejects any email not in public.allowed_users. Adding a
+# row there is all it takes to let someone in: their first login creates the
+# account.
+enable_signup = true
 enable_anonymous_sign_ins = false
 
 [auth.email]

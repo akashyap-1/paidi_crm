@@ -20,7 +20,7 @@ export function Login({ notAllowed, onSignOut }: { notAllowed?: boolean; onSignO
     // Errors are swallowed on purpose: an unknown email and a known one look identical.
     await supabase.auth.signInWithOtp({
       email: email.trim().toLowerCase(),
-      options: { shouldCreateUser: false, emailRedirectTo: window.location.origin + window.location.pathname },
+      options: { shouldCreateUser: true, emailRedirectTo: window.location.origin + window.location.pathname },
     }).catch(() => {});
     setBusy(false);
     setSent(true);
