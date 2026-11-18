@@ -27,7 +27,8 @@ const PRESETS: { value: Preset; label: string; phrase: string }[] = [
   { value: "year", label: "This year", phrase: "this year" },
   { value: "all", label: "All time", phrase: "at any time" },
 ];
-const DEFAULT_PRESET: Preset = "90";
+// All time: outreach history is short, and a shorter default hid the first batches.
+const DEFAULT_PRESET: Preset = "all";
 const DAY = /^\d{4}-\d{2}-\d{2}$/;
 const MIN_SENDS = 5;
 const MIN_SEGMENT = 3;
@@ -312,6 +313,21 @@ function ActivityView({ crm, touches, range, onLog }: { crm: Crm; touches: Inter
     return { people, weeks, cell, totals, weekTotal, max };
   }, [crm.team, crm.member, touches]);
 
+  const summary = useMemo(() => {
+    const out = touches.filter((t) => t.type === "email_out");
+    const typeOf = (t: Interaction) => (t.template_id ? crm.template.get(t.template_id)?.type : undefined);
+    const cold = out.filter((t) => typeOf(t) === "cold_email");
+    const replies = touches.filter((t) => t.type === "email_in" && !/auto-?reply/i.test(t.outcome ?? ""));
+    return [
+      { label: "Emails sent", value: out.length, hint: "Every outbound email, including client and mentor threads" },
+      { label: "Cold emails", value: cold.length, hint: `To ${new Set(cold.map((t) => t.company_id)).size} companies` },
+      { label: "Follow-ups", value: out.filter((t) => typeOf(t) === "follow_up").length, hint: "Sent from a follow-up template" },
+      { label: "Companies replied", value: new Set(replies.map((t) => t.company_id)).size, hint: `${replies.length} emails received; auto-replies left out` },
+      { label: "Calls", value: touches.filter((t) => ["call", "voicemail", "gatekeeper"].includes(t.type)).length, hint: "Including voicemails and gatekeepers" },
+      { label: "Meetings", value: touches.filter((t) => t.type === "meeting").length, hint: "Held" },
+    ];
+  }, [touches, crm.template]);
+
   const { people, weeks, cell, totals, weekTotal, max } = data;
   const caption = <>Emails sent, calls (including voicemails and gatekeepers) and meetings logged {range.phrase}, by the date each touch happened. Weeks start on Monday.</>;
   if (weeks.length === 0) {
@@ -328,6 +344,15 @@ function ActivityView({ crm, touches, range, onLog }: { crm: Crm; touches: Inter
   const chartWeeks = weeks.slice(-MAX_CHART_WEEKS);
   return (
     <Section title="Activity" caption={caption}>
+      <dl className="card mb-4 grid grid-cols-2 gap-x-6 gap-y-3 px-4 py-3.5 sm:grid-cols-3 lg:grid-cols-6">
+        {summary.map((s) => (
+          <div key={s.label} className="min-w-0">
+            <dt className="text-[12.5px] font-semibold text-mute">{s.label}</dt>
+            <dd className="text-[22px] font-bold leading-tight">{s.value}</dd>
+            <dd className="text-[12px] text-mute">{s.hint}</dd>
+          </div>
+        ))}
+      </dl>
       <div className="mb-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {people.map((p) => {
           const total = totals.get(p.id)!.reduce((a, b) => a + b, 0);
